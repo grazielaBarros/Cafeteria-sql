@@ -1,50 +1,14 @@
-# ☕ Banco de Dados Cafeteria
-
-Este repositório contém o script SQL para criação e popularização inicial do banco de dados **Cafeteria**, desenvolvido como parte da disciplina **Projeto Integrador 2** do curso de **Tecnologia da Informação**.  
-
-O banco foi modelado para atender um pequeno comércio (cafeteria), permitindo armazenar informações sobre **clientes, produtos e pedidos**.
-
----
-
-## 📂 Estrutura do Banco de Dados
-
-O banco é composto pelas seguintes tabelas relacionais:
-
-- **clientes**  
-  - `id_cliente` (chave primária)  
-  - `nome`  
-  - `email`  
-
-- **produtos**  
-  - `id_produto` (chave primária)  
-  - `nome`  
-  - `preco`  
-  - `estoque`  
-
-- **pedidos**  
-  - `id_pedido` (chave primária)  
-  - `id_cliente` (chave estrangeira → clientes)  
-  - `data_pedido`  
-
-- **pedido_itens**  
-  - `id_item` (chave primária)  
-  - `id_pedido` (chave estrangeira → pedidos)  
-  - `id_produto` (chave estrangeira → produtos)  
-  - `quantidade`  
-
----
-
-## 🛠 Tecnologias Utilizadas
-- **PostgreSQL** (Banco de dados relacional)
-- **SQL** (Linguagem de definição e manipulação de dados)
-- **Git/GitHub** (Controle de versão e hospedagem do projeto)
-
----
-## 💻Script Utilizados
-### 1. Criação do banco de dados
-```sql
+-- =======================================
+-- 1. Criação do banco de dados
+-- =======================================
 CREATE DATABASE cafeteria_db;
 
+-- Conectar no banco (no terminal psql)
+\c cafeteria_db
+
+-- =======================================
+-- 2. Tabela de Clientes
+-- =======================================
 CREATE TABLE clientes (
     id_cliente SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
@@ -58,6 +22,9 @@ INSERT INTO clientes (nome, email, telefone) VALUES
 ('Maria Oliveira', 'maria@email.com', '2198888-2222'),
 ('Carlos Souza', 'carlos@email.com', '3197777-3333');
 
+-- =======================================
+-- 3. Tabela de Produtos
+-- =======================================
 CREATE TABLE produtos (
     id_produto SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
@@ -71,6 +38,9 @@ INSERT INTO produtos (nome, preco, estoque) VALUES
 ('Cappuccino', 7.50, 30),
 ('Bolo de Chocolate', 12.00, 10);
 
+-- =======================================
+-- 4. Tabela de Pedidos
+-- =======================================
 CREATE TABLE pedidos (
     id_pedido SERIAL PRIMARY KEY,
     id_cliente INT NOT NULL,
@@ -84,6 +54,9 @@ INSERT INTO pedidos (id_cliente) VALUES
 (2), -- Maria
 (3); -- Carlos
 
+-- =======================================
+-- 5. Tabela de Itens do Pedido
+-- =======================================
 CREATE TABLE pedido_itens (
     id_item SERIAL PRIMARY KEY,
     id_pedido INT NOT NULL,
@@ -100,18 +73,3 @@ INSERT INTO pedido_itens (id_pedido, id_produto, quantidade) VALUES
 (2, 2, 1), -- Pedido 2 (Maria): 1 cappuccino
 (3, 1, 1), -- Pedido 3 (Carlos): 1 café
 (3, 2, 2); -- Pedido 3 (Carlos): 2 cappuccinos
-```
-
-
----
-## 🚀 Como Executar
-
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/grazielaBarros/Cafeteria-sql.git
-
-
----
-
-👉Projeto desenvolvido por Graziela de Souza Barros – 2025.2
-Disciplina: Projeto Integrador 2
